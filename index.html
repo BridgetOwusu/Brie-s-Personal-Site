@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bridget Owusu — Engineer. Founder. Thinker.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1510;
+    --gold: #C9A84C;
+    --rust: #8B3A2A;
+    --sage: #4A5E50;
+    --warm: #9E9088;
+    --card: #EFEAD8;
+    --dark: #0E0A06;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:500;
+    display: flex; justify-content:space-between; align-items:center;
+    padding: 1.4rem 3.5rem;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(15,10,6,0.92);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight:300; letter-spacing:0.08em;
+    color: var(--cream); text-decoration:none;
+  }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase;
+    color: rgba(245,240,232,0.55); text-decoration:none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-family: 'Space Mono', monospace;
+    font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase;
+    padding: 0.55rem 1.2rem;
+    border: 1px solid var(--gold);
+    color: var(--gold); text-decoration:none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--ink); }
+
+  /* Hamburger */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger span { display:block; width:22px; height:1.5px; background:var(--cream); transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+  /* Mobile menu overlay */
+  .mobile-menu { display:none; position:fixed; inset:0; background:rgba(10,7,4,0.97); z-index:490; flex-direction:column; justify-content:center; align-items:center; gap:2.5rem; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:300; color:var(--cream); text-decoration:none; letter-spacing:0.04em; transition:color 0.2s; }
+  .mobile-menu a:hover { color:var(--gold); }
+  .mobile-menu .mob-cta { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; padding:0.7rem 1.8rem; border:1px solid var(--gold); color:var(--gold); margin-top:1rem; }
+  .mobile-menu .mob-cta:hover { background:var(--gold); color:var(--ink); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height:100vh;
+    display:grid; grid-template-columns: 55% 45%;
+    position:relative; overflow:hidden;
+  }
+  .hero-left {
+    background: var(--dark);
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding: 9rem 4rem 5.5rem;
+    position:relative; z-index:2;
+  }
+  .hero-left::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 30% 70%, rgba(201,168,76,0.07), transparent 65%);
+    pointer-events:none;
+  }
+  .hero-eyebrow {
+    font-family:'Space Mono',monospace;
+    font-size:0.62rem; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:1.6rem;
+    opacity:0; transform:translateY(15px);
+    animation: rise 0.9s ease forwards 0.2s;
+  }
+  .hero-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size: clamp(4.5rem,9vw,8.5rem);
+    font-weight:300; line-height:0.92; color:var(--cream);
+    margin-bottom:1.4rem;
+    opacity:0; transform:translateY(25px);
+    animation: rise 1s ease forwards 0.45s;
+  }
+  .hero-name em { font-style:italic; color:var(--gold); }
+  .hero-sub {
+    font-size:1rem; font-weight:300; line-height:1.8;
+    color:rgba(245,240,232,0.55); max-width:360px; margin-bottom:3rem;
+    opacity:0; animation: rise 1s ease forwards 0.7s;
+  }
+  .hero-actions {
+    display:flex; gap:1.2rem; align-items:center;
+    opacity:0; animation: rise 1s ease forwards 0.95s;
+  }
+  .btn-primary {
+    font-family:'Space Mono',monospace;
+    font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase;
+    padding:0.85rem 2rem;
+    background:var(--gold); color:var(--ink);
+    text-decoration:none; border:none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background:#D4B055; transform:translateY(-1px); }
+  .btn-ghost {
+    font-family:'Space Mono',monospace;
+    font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase;
+    color: rgba(245,240,232,0.6); text-decoration:none;
+    border-bottom: 1px solid rgba(201,168,76,0.4);
+    padding-bottom:0.2rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color:var(--gold); border-color:var(--gold); }
+
+  .hero-right {
+    background:var(--ink);
+    position:relative; overflow:hidden;
+  }
+  .hero-img-block {
+    width:100%; height:100%;
+    position:absolute; top:0; left:0; right:0; bottom:0;
+  }
+  .hero-img-block::after {
+    content:'';
+    position:absolute; bottom:0; left:0; right:0; height:35%;
+    background: linear-gradient(to top, rgba(14,10,6,0.75), transparent);
+    z-index:2; pointer-events:none;
+  }
+  .hero-photo-frame {
+    width:100%; height:100%;
+    position:absolute; top:0; left:0;
+    overflow:hidden;
+  }
+  .hero-photo-frame img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:top center; display:block;
+  }
+  .hero-caption {
+    position:absolute; bottom:1.8rem; left:2rem; z-index:3;
+    font-family:'Space Mono',monospace;
+    font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:rgba(245,240,232,0.25);
+  }
+  .hero-scroll {
+    position:absolute; bottom:2rem; left:50%;
+    transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+    z-index:10;
+    font-family:'Space Mono',monospace;
+    font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase;
+    color: rgba(201,168,76,0.6);
+  }
+  .scroll-bar { width:1px; height:44px; background:var(--gold); animation:pulse 2s ease-in-out infinite; }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background:var(--ink); padding:0.85rem 0; overflow:hidden; white-space:nowrap;
+  }
+  .ticker { display:inline-flex; gap:3rem; animation:tickerMove 22s linear infinite; }
+  .ticker span {
+    font-family:'Space Mono',monospace;
+    font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase;
+    color:rgba(201,168,76,0.6);
+  }
+  .ticker .gem { color:var(--rust); opacity:1; }
+
+  /* ── SECTION SHARED ── */
+  .sec-label {
+    font-family:'Space Mono',monospace;
+    font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:2.5rem;
+    display:flex; align-items:center; gap:1rem;
+  }
+  .sec-label::before { content:''; width:28px; height:1px; background:var(--gold); display:block; }
+
+  /* ── ABOUT ── */
+  #about {
+    display:grid; grid-template-columns:1fr 1.5fr;
+    min-height:80vh;
+  }
+  .about-left {
+    background:var(--card);
+    padding:6rem 4rem;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .about-left::after {
+    content:'"';
+    font-family:'Cormorant Garamond',serif;
+    font-size:22rem; color:rgba(201,168,76,0.06);
+    position:absolute; top:-4rem; left:0;
+    line-height:1; pointer-events:none;
+  }
+  .about-quote {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.5rem,2.3vw,2rem); font-weight:300; line-height:1.55;
+    color:var(--ink); position:relative; z-index:1;
+  }
+  .about-quote em { font-style:italic; color:var(--rust); }
+  .about-right {
+    padding:6rem 5rem 6rem 4.5rem;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .about-right h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.2rem,4vw,3.2rem); font-weight:300; margin-bottom:2rem; line-height:1.2;
+  }
+  .about-body {
+    font-size:1rem; line-height:1.85; color:#4A3F34; margin-bottom:1.4rem; max-width:500px;
+  }
+  .value-chips { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:2.5rem; }
+  .chip {
+    font-family:'Space Mono',monospace;
+    font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase;
+    padding:0.45rem 1rem;
+    border:1px solid rgba(139,58,42,0.3); color:var(--rust); border-radius:2px;
+  }
+
+  /* ── WORK ── */
+  #work { padding:7rem 4rem; background:var(--cream); }
+  .work-header {
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:4rem;
+    border-bottom:1px solid rgba(26,21,16,0.12); padding-bottom:2rem;
+  }
+  .work-header h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.5rem,5vw,4.5rem); font-weight:300; line-height:1;
+  }
+  .work-header h2 em { font-style:italic; color:var(--rust); }
+  .work-count {
+    font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:0.15em; color:var(--warm);
+  }
+  .work-grid {
+    display:grid; grid-template-columns:1.4fr 1fr 1fr;
+    gap:1.5px; background:rgba(26,21,16,0.1);
+  }
+  .work-card {
+    background:var(--cream); padding:3rem 2.5rem;
+    position:relative; overflow:hidden; cursor:pointer;
+    transition:background 0.3s; min-height:280px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .work-card:hover { background:var(--card); }
+  .work-card.featured { grid-row:span 2; min-height:460px; }
+  .wc-num {
+    font-family:'Space Mono',monospace; font-size:0.58rem;
+    color:var(--warm); letter-spacing:0.1em;
+  }
+  .wc-body { margin-top:auto; }
+  .wc-tag {
+    font-family:'Space Mono',monospace; font-size:0.56rem;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem;
+  }
+  .work-card h3 {
+    font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:400; line-height:1.2; margin-bottom:0.8rem;
+  }
+  .work-card.featured h3 { font-size:2.1rem; }
+  .work-card p { font-size:0.85rem; line-height:1.7; color:var(--warm); max-width:280px; }
+  .wc-arrow {
+    position:absolute; bottom:2.5rem; right:2.5rem; font-size:1.1rem; color:var(--gold);
+    opacity:0; transform:translateX(-5px); transition:opacity 0.2s, transform 0.2s;
+  }
+  .work-card:hover .wc-arrow { opacity:1; transform:translateX(0); }
+  .wc-bg {
+    position:absolute; inset:0;
+    font-family:'Cormorant Garamond',serif; font-size:11rem; font-weight:600;
+    color:rgba(201,168,76,0.04); display:flex; align-items:flex-end;
+    line-height:1; pointer-events:none; padding-left:1rem;
+  }
+
+  /* ══════════════════════════════
+     GATEWAY PANELS — SPEAKING & BRAND
+     Two dramatic full-bleed doors
+  ══════════════════════════════ */
+  #opportunities {
+    display:grid; grid-template-columns:1fr 1fr;
+    min-height:70vh;
+  }
+
+  .opp-panel {
+    position:relative; overflow:hidden; cursor:pointer;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:4rem;
+    transition:filter 0.4s;
+    text-decoration:none;
+  }
+
+  .opp-panel.speaking { background:var(--ink); }
+  .opp-panel.brand    { background:var(--rust); }
+
+  .opp-panel::before {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    pointer-events:none; z-index:1;
+    transition: opacity 0.4s;
+  }
+  .opp-panel:hover::before { opacity:0.5; }
+
+  .opp-bg-word {
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-52%);
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600; font-size:clamp(7rem,14vw,13rem); line-height:1;
+    white-space:nowrap; pointer-events:none;
+    transition: transform 0.5s ease, opacity 0.5s;
+    z-index:0;
+  }
+  .opp-panel.speaking .opp-bg-word { color:rgba(201,168,76,0.06); }
+  .opp-panel.brand    .opp-bg-word { color:rgba(245,240,232,0.07); }
+  .opp-panel:hover .opp-bg-word { transform:translate(-50%,-52%) scale(1.04); opacity:0.8; }
+
+  .opp-content { position:relative; z-index:2; }
+
+  .opp-label {
+    font-family:'Space Mono',monospace;
+    font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase;
+    margin-bottom:1rem; display:flex; align-items:center; gap:1rem;
+  }
+  .opp-panel.speaking .opp-label { color:var(--gold); }
+  .opp-panel.brand    .opp-label { color:rgba(245,240,232,0.6); }
+  .opp-label::before { content:''; width:24px; height:1px; background:currentColor; display:block; }
+
+  .opp-panel h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.2rem,4vw,3.5rem); font-weight:300; line-height:1.1; margin-bottom:1.2rem;
+  }
+  .opp-panel.speaking h2 { color:var(--cream); }
+  .opp-panel.brand    h2 { color:var(--cream); }
+
+  .opp-panel p {
+    font-size:0.9rem; line-height:1.75; max-width:400px; margin-bottom:2rem;
+  }
+  .opp-panel.speaking p { color:rgba(245,240,232,0.55); }
+  .opp-panel.brand    p { color:rgba(245,240,232,0.65); }
+
+  .opp-topics { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2.5rem; }
+  .opp-topic {
+    font-family:'Space Mono',monospace; font-size:0.58rem;
+    letter-spacing:0.1em; text-transform:uppercase;
+    padding:0.4rem 0.8rem; border-radius:2px;
+  }
+  .opp-panel.speaking .opp-topic {
+    background:rgba(201,168,76,0.12); color:var(--gold);
+    border:1px solid rgba(201,168,76,0.2);
+  }
+  .opp-panel.brand .opp-topic {
+    background:rgba(245,240,232,0.12); color:var(--cream);
+    border:1px solid rgba(245,240,232,0.2);
+  }
+
+  .opp-cta {
+    display:inline-flex; align-items:center; gap:0.8rem;
+    font-family:'Space Mono',monospace; font-size:0.65rem;
+    letter-spacing:0.15em; text-transform:uppercase;
+    padding:0.85rem 2rem; text-decoration:none;
+    transition: transform 0.2s;
+  }
+  .opp-panel.speaking .opp-cta {
+    background:var(--gold); color:var(--ink);
+  }
+  .opp-panel.brand .opp-cta {
+    background:var(--cream); color:var(--rust);
+  }
+  .opp-cta:hover { transform:translateY(-2px); }
+  .opp-cta::after { content:'→'; }
+
+  /* ── NOW PAGE STRIP ── */
+  #now {
+    background:var(--card); border-top:1px solid rgba(26,21,16,0.1);
+    padding:4.5rem 4rem;
+  }
+  .now-inner {
+    display:grid; grid-template-columns:280px 1fr;
+    gap:4rem; align-items:start;
+  }
+  .now-left h3 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.2rem; font-weight:300; line-height:1.1; margin-bottom:0.8rem;
+  }
+  .now-left .now-date {
+    font-family:'Space Mono',monospace; font-size:0.58rem;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--warm);
+  }
+  .now-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+  .now-card {
+    border-top:2px solid var(--gold); padding-top:1rem;
+  }
+  .now-card .nc-cat {
+    font-family:'Space Mono',monospace; font-size:0.55rem;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:0.6rem;
+  }
+  .now-card .nc-val {
+    font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:400; line-height:1.4; color:var(--ink);
+  }
+
+  /* ── THINKING ── */
+  #thinking {
+    background:var(--ink); padding:7rem 4rem; color:var(--cream);
+  }
+  #thinking h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.5rem,5vw,4rem); font-weight:300; line-height:1.1;
+    margin-bottom:1rem; max-width:600px;
+  }
+  #thinking .sub {
+    font-size:0.95rem; color:rgba(245,240,232,0.45);
+    max-width:480px; line-height:1.7; margin-bottom:4rem;
+  }
+  .thinking-grid {
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:1px; background:rgba(245,240,232,0.08); margin-bottom:4rem;
+  }
+  .thought-card {
+    background:var(--ink); padding:2.8rem 2.5rem; transition:background 0.3s; cursor:pointer;
+  }
+  .thought-card:hover { background:#1E1409; }
+  .tc-type {
+    font-family:'Space Mono',monospace; font-size:0.56rem;
+    letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--gold); opacity:0.7; margin-bottom:1.5rem;
+  }
+  .thought-card h4 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.35rem; font-weight:300; line-height:1.4; margin-bottom:0.9rem; color:var(--cream);
+  }
+  .thought-card p { font-size:0.82rem; line-height:1.7; color:rgba(245,240,232,0.4); }
+
+  /* ── RECOGNITION ── */
+  #recognition {
+    background:var(--cream); padding:5rem 4rem;
+    border-top:1px solid rgba(26,21,16,0.1);
+  }
+  .rec-inner {
+    display:grid; grid-template-columns:240px 1fr;
+    gap:4rem; align-items:center;
+  }
+  .rec-left h3 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:2rem; font-weight:300; line-height:1.2;
+  }
+  .rec-left p { font-size:0.85rem; color:var(--warm); line-height:1.7; margin-top:0.8rem; }
+  .rec-items { display:flex; flex-wrap:wrap; gap:1.5rem; }
+  .rec-item {
+    display:flex; align-items:center; gap:1rem;
+    padding:1.2rem 1.8rem;
+    border:1px solid rgba(26,21,16,0.12); background:var(--card);
+    min-width:220px;
+  }
+  .rec-icon { font-size:1.4rem; }
+  .rec-item-text .rt { font-size:0.78rem; font-weight:500; color:var(--ink); }
+  .rec-item-text .rs {
+    font-family:'Space Mono',monospace; font-size:0.56rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--warm); margin-top:0.2rem;
+  }
+
+  /* ── CONNECT ── */
+  #connect {
+    background:var(--rust); padding:8rem 4rem;
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:4rem; align-items:center; position:relative; overflow:hidden;
+  }
+  #connect::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 0% 100%, rgba(201,168,76,0.2), transparent 60%);
+    pointer-events:none;
+  }
+  .connect-left h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(3rem,6vw,5.5rem); font-weight:300; line-height:1; color:var(--cream); margin-bottom:1.5rem;
+  }
+  .connect-left h2 em { font-style:italic; opacity:0.65; }
+  .connect-left p { font-size:1rem; line-height:1.75; color:rgba(245,240,232,0.65); max-width:380px; }
+  .connect-right { display:flex; flex-direction:column; gap:1.2rem; position:relative; z-index:1; }
+  .conn-link {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.4rem 1.8rem;
+    background:rgba(245,240,232,0.08); border:1px solid rgba(245,240,232,0.15);
+    text-decoration:none; color:var(--cream);
+    transition:background 0.2s, border-color 0.2s;
+  }
+  .conn-link:hover { background:rgba(245,240,232,0.15); border-color:rgba(245,240,232,0.35); }
+  .cl-label {
+    font-family:'Space Mono',monospace; font-size:0.58rem;
+    letter-spacing:0.2em; text-transform:uppercase; opacity:0.45; display:block; margin-bottom:0.25rem;
+  }
+  .cl-text { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:300; }
+  .cl-arrow { opacity:0.45; font-size:0.9rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--ink); padding:2rem 4rem;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .f-l { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:300; color:rgba(245,240,232,0.35); }
+  .f-r {
+    font-family:'Space Mono',monospace; font-size:0.56rem;
+    letter-spacing:0.15em; text-transform:uppercase; color:rgba(245,240,232,0.2);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes rise { to { opacity:1; transform:translateY(0); } }
+  @keyframes tickerMove { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  @keyframes pulse {
+    0%,100%{opacity:0.3;transform:scaleY(1)}
+    50%{opacity:1;transform:scaleY(1.15)}
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity:0; transform:translateY(28px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-delay-1 { transition-delay:0.1s; }
+  .reveal-delay-2 { transition-delay:0.2s; }
+  .reveal-delay-3 { transition-delay:0.3s; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:960px){
+    #hero{grid-template-columns:1fr}
+    .hero-right{height:50vh}
+    #about{grid-template-columns:1fr}
+    .work-grid{grid-template-columns:1fr}
+    .work-card.featured{grid-row:span 1}
+    #opportunities{grid-template-columns:1fr}
+    .now-inner,.rec-inner{grid-template-columns:1fr}
+    .now-grid{grid-template-columns:1fr 1fr}
+    .thinking-grid{grid-template-columns:1fr}
+    #connect{grid-template-columns:1fr}
+    nav{padding:1rem 1.5rem}
+    .nav-links{display:none}
+    .nav-cta{display:none}
+    .hamburger{display:flex}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">B. —</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Connect</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html" onclick="closeMob()">About</a>
+  <a href="work.html" onclick="closeMob()">Work</a>
+  <a href="speaking.html" onclick="closeMob()">Speaking</a>
+  <a href="collabs.html" onclick="closeMob()">Collaborations</a>
+  <a href="thinking.html" onclick="closeMob()">Thinking</a>
+  <a href="contact.html" class="mob-cta" onclick="closeMob()">Connect</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Engineer · Founder · Thinker</p>
+    <h1 class="hero-name">Building<br>at the <em>edge</em><br>of what's<br>possible.</h1>
+    <p class="hero-sub">Electrical & Computer Engineering student building toward AI Engineering. Founder of King's Eye Visuals. I create at the intersection of technology and creativity — engineering things that actually matter.</p>
+    <div class="hero-actions">
+      <a href="#opportunities" class="btn-primary">Work With Me</a>
+      <a href="#about" class="btn-ghost">Explore my story</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-block">
+      <div class="hero-photo-frame">
+        <img src="brie-photo.jpg" alt="Bridget Owusu">
+      </div>
+      <span class="hero-caption">Bridget Owusu · 2025</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>ECE Student</span><span class="gem">✦</span>
+    <span>AI Engineering</span><span class="gem">✦</span>
+    <span>Founder</span><span class="gem">✦</span>
+    <span>King's Eye Visuals</span><span class="gem">✦</span>
+    <span>Faith-Driven</span><span class="gem">✦</span>
+    <span>Speaker</span><span class="gem">✦</span>
+    <span>Brand Partner</span><span class="gem">✦</span>
+    <span>Reviewer</span><span class="gem">✦</span>
+    <span>Delaware Tech Scholar</span><span class="gem">✦</span>
+    <span>Builder</span><span class="gem">✦</span>
+    <!-- loop duplicate -->
+    <span>ECE Student</span><span class="gem">✦</span>
+    <span>AI Engineering</span><span class="gem">✦</span>
+    <span>Founder</span><span class="gem">✦</span>
+    <span>King's Eye Visuals</span><span class="gem">✦</span>
+    <span>Faith-Driven</span><span class="gem">✦</span>
+    <span>Speaker</span><span class="gem">✦</span>
+    <span>Brand Partner</span><span class="gem">✦</span>
+    <span>Reviewer</span><span class="gem">✦</span>
+    <span>Delaware Tech Scholar</span><span class="gem">✦</span>
+    <span>Builder</span><span class="gem">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left reveal">
+    <div class="sec-label">What I stand for</div>
+    <blockquote class="about-quote">
+      "I don't just study technology — I think about what it <em>means</em> to build things that matter, for people who matter."
+    </blockquote>
+  </div>
+  <div class="about-right">
+    <h2 class="reveal">A different kind<br>of engineer.</h2>
+    <p class="about-body reveal reveal-delay-1">I'm a first-year Electrical & Computer Engineering student on a path toward AI Engineering — but my story started long before any classroom. I'm a founder, a creative director, a General Manager, and someone who asks "why" before "how."</p>
+    <p class="about-body reveal reveal-delay-2">My faith shapes how I see problems. My creative work sharpens how I communicate solutions. And my drive to understand people — not just systems — is what I'm bringing into the future of AI.</p>
+    <div class="value-chips reveal reveal-delay-3">
+      <span class="chip">Faith-rooted</span>
+      <span class="chip">Human-centered AI</span>
+      <span class="chip">Creative precision</span>
+      <span class="chip">Root-cause thinking</span>
+      <span class="chip">Long-game builder</span>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="work-header reveal">
+    <h2>Selected <em>work</em></h2>
+    <span class="work-count">03 projects</span>
+  </div>
+  <div class="work-grid">
+    <div class="work-card featured reveal">
+      <div class="wc-bg">K</div>
+      <span class="wc-num">01</span>
+      <div class="wc-body">
+        <div class="wc-tag">Creative Direction · Visual Identity</div>
+        <h3>King's Eye Visuals</h3>
+        <p>A creative and technical media venture. Brand photography, visual storytelling, and intentional content creation built around a distinctive aesthetic point of view.</p>
+      </div>
+      <span class="wc-arrow">→</span>
+    </div>
+    <div class="work-card reveal reveal-delay-1">
+      <div class="wc-bg">G</div>
+      <span class="wc-num">02</span>
+      <div class="wc-body">
+        <div class="wc-tag">Leadership · Operations</div>
+        <h3>General Manager,<br>Chocolate Moonshine</h3>
+        <p>Team leadership, daily operations, and performance management — at an age when most are still figuring out the basics.</p>
+      </div>
+      <span class="wc-arrow">→</span>
+    </div>
+    <div class="work-card reveal reveal-delay-2">
+      <div class="wc-bg">E</div>
+      <span class="wc-num">03</span>
+      <div class="wc-body">
+        <div class="wc-tag">Engineering · ECE</div>
+        <h3>Engineering<br>Coursework</h3>
+        <p>C++, circuit analysis, and the foundations of electrical engineering — with AI applications always in view.</p>
+      </div>
+      <span class="wc-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SPEAKING & BRAND GATEWAYS ══ -->
+<section id="opportunities">
+
+  <!-- SPEAKING PANEL -->
+  <a href="mailto:thebridgetowusu@gmail.com?subject=Speaking%20Engagement%20Inquiry" class="opp-panel speaking" target="_blank">
+    <div class="opp-bg-word">Speak</div>
+    <div class="opp-content">
+      <div class="opp-label">Speaking Engagements</div>
+      <h2>I have a voice.<br>And a stage is next.</h2>
+      <p>I speak from the intersection of lived experience and emerging expertise — not theory handed down from a stage, but the view from someone building in real time. Available for panels, keynotes, workshops, and faith-based events.</p>
+      <div class="opp-topics">
+        <span class="opp-topic">AI & Ethics</span>
+        <span class="opp-topic">Non-Traditional Paths</span>
+        <span class="opp-topic">Faith & Technology</span>
+        <span class="opp-topic">Women in STEM</span>
+        <span class="opp-topic">Building Before You're Ready</span>
+      </div>
+      <span class="opp-cta">Book Me to Speak</span>
+    </div>
+  </a>
+
+  <!-- BRAND PANEL -->
+  <a href="mailto:thebridgetowusu@gmail.com?subject=Collaboration%20Inquiry" class="opp-panel brand" target="_blank">
+    <div class="opp-bg-word">Build</div>
+    <div class="opp-content">
+      <div class="opp-label">Brand Collaborations</div>
+      <h2>The right brands.<br>Honest reviews.</h2>
+      <p>I partner with brands that align with my values and my audience — technology, education, creativity, and human flourishing. My reviews come from actual use, and my aesthetic comes from years of intentional creative work.</p>
+      <div class="opp-topics">
+        <span class="opp-topic">Tech & Gadgets</span>
+        <span class="opp-topic">Education Tools</span>
+        <span class="opp-topic">Creative Software</span>
+        <span class="opp-topic">Lifestyle</span>
+        <span class="opp-topic">Faith & Wellness</span>
+      </div>
+      <span class="opp-cta">Let's Collaborate</span>
+    </div>
+  </a>
+
+</section>
+
+<!-- NOW PAGE STRIP -->
+<section id="now">
+  <div class="now-inner">
+    <div class="now-left reveal">
+      <div class="sec-label">Now</div>
+      <h3>What I'm<br>currently doing.</h3>
+      <p class="now-date">Last updated · Spring 2025</p>
+    </div>
+    <div class="now-grid">
+      <div class="now-card reveal">
+        <div class="nc-cat">Studying</div>
+        <div class="nc-val">ECE Year 1 at DTCC — C++, Circuit Analysis, Precalculus</div>
+      </div>
+      <div class="now-card reveal reveal-delay-1">
+        <div class="nc-cat">Building</div>
+        <div class="nc-val">King's Eye Visuals — shoots, brand content, and creative direction</div>
+      </div>
+      <div class="now-card reveal reveal-delay-2">
+        <div class="nc-cat">Reading</div>
+        <div class="nc-val">AI ethics, systems thinking, theology and apologetics</div>
+      </div>
+      <div class="now-card reveal reveal-delay-3">
+        <div class="nc-cat">Upcoming</div>
+        <div class="nc-val">Microsoft Ability Summit — May 2026, Redmond WA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THINKING -->
+<section id="thinking">
+  <div class="sec-label" style="color:var(--gold)">Ideas in motion</div>
+  <h2 class="reveal">I think out<br>loud, on purpose.</h2>
+  <p class="sub reveal reveal-delay-1">Analysis, theology, technology, and the questions worth asking. Writing and podcasting at the intersection of faith, systems, and human experience.</p>
+  <div class="thinking-grid">
+    <div class="thought-card reveal">
+      <div class="tc-type">Podcast Concept</div>
+      <h4>The Business Autopsy</h4>
+      <p>Story hook → slow dissection → principle extraction. Why businesses actually succeed or fail — not the headline version.</p>
+    </div>
+    <div class="thought-card reveal reveal-delay-1">
+      <div class="tc-type">Intellectual Inquiry</div>
+      <h4>Wisdom of the Age</h4>
+      <p>A conversation across time — theology, philosophy, and the ideas that refuse to stay in their centuries.</p>
+    </div>
+    <div class="thought-card reveal reveal-delay-2">
+      <div class="tc-type">AI + Ethics</div>
+      <h4>The Human-Centered Machine</h4>
+      <p>What does it mean to build AI that actually serves human dignity? Notes from someone learning to build it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITION -->
+<section id="recognition">
+  <div class="rec-inner">
+    <div class="rec-left reveal">
+      <div class="sec-label">Recognition</div>
+      <h3>Credentials<br>& Milestones</h3>
+      <p>Institutional validation, industry presence, and early markers on a long road.</p>
+    </div>
+    <div class="rec-items">
+      <div class="rec-item reveal">
+        <span class="rec-icon">🎓</span>
+        <div class="rec-item-text">
+          <div class="rt">DTCC Academic Scholarship</div>
+          <div class="rs">Engineering Track · 2024–present</div>
+        </div>
+      </div>
+      <div class="rec-item reveal reveal-delay-1">
+        <span class="rec-icon">🏢</span>
+        <div class="rec-item-text">
+          <div class="rt">General Manager</div>
+          <div class="rs">Chocolate Moonshine · Christiana Mall</div>
+        </div>
+      </div>
+      <div class="rec-item reveal reveal-delay-2">
+        <span class="rec-icon">🚀</span>
+        <div class="rec-item-text">
+          <div class="rt">Founder · King's Eye Visuals</div>
+          <div class="rs">Creative + Technical Media Venture</div>
+        </div>
+      </div>
+      <div class="rec-item reveal reveal-delay-3">
+        <span class="rec-icon">🎤</span>
+        <div class="rec-item-text">
+          <div class="rt">Microsoft Ability Summit</div>
+          <div class="rs">Attendee · May 2026 · Redmond WA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="connect-left">
+    <h2>Let's make<br>something <em>real.</em></h2>
+    <p>I'm selective about who I work with and what I build — which means when I say yes, I mean it fully. Whether it's a brand deal, a speaking slot, or a conversation worth having — reach out.</p>
+  </div>
+  <div class="connect-right">
+    <a href="mailto:thebridgetowusu@gmail.com?subject=Speaking%20Engagement%20Inquiry" class="conn-link" target="_blank">
+      <div><span class="cl-label">Speaking</span><span class="cl-text">Book a Speaking Engagement</span></div>
+      <span class="cl-arrow">↗</span>
+    </a>
+    <a href="mailto:thebridgetowusu@gmail.com?subject=Collaboration%20Inquiry" class="conn-link" target="_blank">
+      <div><span class="cl-label">Brand Partnership</span><span class="cl-text">Collaboration Inquiry</span></div>
+      <span class="cl-arrow">↗</span>
+    </a>
+    <a href="https://www.linkedin.com/in/bridget-owusu-36518b219" class="conn-link" target="_blank">
+      <div><span class="cl-label">Professional</span><span class="cl-text">Connect on LinkedIn</span></div>
+      <span class="cl-arrow">↗</span>
+    </a>
+    <a href="https://www.instagram.com/kingseyevisuals" class="conn-link" target="_blank">
+      <div><span class="cl-label">Creative Work</span><span class="cl-text">King's Eye Visuals on Instagram</span></div>
+      <span class="cl-arrow">↗</span>
+    </a>
+    <a href="https://www.instagram.com/thebridgetowusu" class="conn-link" target="_blank">
+      <div><span class="cl-label">Personal</span><span class="cl-text">Follow me on Instagram</span></div>
+      <span class="cl-arrow">↗</span>
+    </a>
+    <a href="mailto:thebridgetowusu@gmail.com" class="conn-link" target="_blank">
+      <div><span class="cl-label">Direct</span><span class="cl-text">thebridgetowusu@gmail.com</span></div>
+      <span class="cl-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-l">Bridget Owusu — Building at the edge.</div>
+  <div class="f-r">© 2025 · All rights reserved · Media kit available on request</div>
+</footer>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll',()=>{
+    document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
+  });
+  // Scroll reveal
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+  },{threshold:0.07});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // Hamburger
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobileMenu');
+  ham.addEventListener('click',()=>{
+    ham.classList.toggle('open');
+    mob.classList.toggle('open');
+    document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMob(){
+    ham.classList.remove('open');
+    mob.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>
