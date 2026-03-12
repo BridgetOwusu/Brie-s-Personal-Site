@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Bridget Owusu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E8;--ink:#1A1510;--gold:#C9A84C;--rust:#8B3A2A;--warm:#9E9088;--card:#EFEAD8;--dark:#0E0A06;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+.cursor{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;}
+.cursor-ring{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3.5rem;transition:background 0.4s;}
+nav.scrolled{background:rgba(15,10,6,0.92);backdrop-filter:blur(12px);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;letter-spacing:0.08em;color:var(--cream);text-decoration:none;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.55);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.55rem 1.2rem;border:1px solid var(--gold);color:var(--gold);text-decoration:none;transition:background 0.2s,color 0.2s;}
+.nav-cta:hover{background:var(--gold);color:var(--ink);}
+
+/* BANNER */
+.page-banner{background:var(--dark);min-height:50vh;display:flex;flex-direction:column;justify-content:flex-end;padding:9rem 4rem 5rem;position:relative;overflow:hidden;}
+.page-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(139,58,42,0.12),transparent 65%);}
+.banner-bg-word{position:absolute;top:50%;right:2rem;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:clamp(9rem,20vw,18rem);font-weight:600;line-height:1;color:rgba(201,168,76,0.04);pointer-events:none;white-space:nowrap;}
+.sl{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem;}
+.sl::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.page-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:0.95;color:var(--cream);position:relative;z-index:1;opacity:0;transform:translateY(20px);animation:rise 0.9s ease forwards 0.3s;}
+.page-banner h1 em{font-style:italic;color:var(--gold);}
+.page-banner .banner-sub{font-size:1rem;color:rgba(245,240,232,0.5);max-width:540px;line-height:1.75;margin-top:1.4rem;position:relative;z-index:1;opacity:0;animation:rise 0.9s ease forwards 0.55s;}
+
+/* FEATURED — KING'S EYE VISUALS */
+#kev{padding:7rem 4rem;background:var(--cream);}
+.kev-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:6rem;align-items:center;}
+.kev-left .sl2{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.kev-left .sl2::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.kev-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.05;margin-bottom:1.2rem;}
+.kev-left h2 em{font-style:italic;color:var(--rust);}
+.kev-left .kev-role{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm);margin-bottom:1.5rem;}
+.kev-left p{font-size:1rem;line-height:1.85;color:#3A3028;margin-bottom:1.2rem;}
+.kev-tags{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.5rem;}
+.kev-tag{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.4rem 0.85rem;border:1px solid rgba(201,168,76,0.4);color:var(--warm);}
+.kev-right{background:var(--dark);aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:flex-end;padding:2.5rem;position:relative;overflow:hidden;}
+.kev-right::before{content:'King\'s Eye Visuals';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:600;color:rgba(201,168,76,0.06);text-align:center;line-height:1.1;white-space:nowrap;}
+.kev-visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;position:relative;z-index:1;}
+.kev-block{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.15);aspect-ratio:1;display:flex;align-items:center;justify-content:center;}
+.kev-block span{font-size:1.5rem;opacity:0.4;}
+.kev-link{margin-top:1.5rem;font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:gap 0.2s;}
+.kev-link:hover{gap:1rem;}
+
+/* ECE WORK */
+#ece{padding:7rem 4rem;background:var(--card);}
+.ece-header{margin-bottom:4rem;}
+.ece-header .sl3{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.ece-header .sl3::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.ece-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.05;margin-bottom:1rem;}
+.ece-header h2 em{font-style:italic;color:var(--rust);}
+.ece-header p{font-size:0.95rem;line-height:1.8;color:#4A3F34;max-width:560px;}
+.ece-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(26,21,16,0.1);}
+.ece-card{background:var(--card);padding:2.5rem 2rem;transition:background 0.3s;}
+.ece-card:hover{background:var(--cream);}
+.ec-course{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.ec-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin-bottom:0.8rem;line-height:1.2;}
+.ec-desc{font-size:0.88rem;line-height:1.7;color:var(--warm);margin-bottom:1.5rem;}
+.ec-items{list-style:none;display:flex;flex-direction:column;gap:0.4rem;}
+.ec-items li{font-size:0.82rem;color:#4A3F34;padding-left:1rem;position:relative;}
+.ec-items li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:0.7rem;}
+
+/* CIRCUIT LABS */
+#circuits{padding:7rem 4rem;background:var(--ink);}
+.circuits-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start;}
+.circuits-left .sl4{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.circuits-left .sl4::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.circuits-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,3.5rem);font-weight:300;line-height:1.05;color:var(--cream);margin-bottom:1.2rem;}
+.circuits-left h2 em{font-style:italic;color:var(--gold);}
+.circuits-left p{font-size:0.95rem;line-height:1.8;color:rgba(245,240,232,0.45);margin-bottom:1.2rem;}
+.circuits-right{display:flex;flex-direction:column;gap:1px;background:rgba(245,240,232,0.08);}
+.lab-item{background:var(--ink);padding:2rem 2.5rem;transition:background 0.3s;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start;}
+.lab-item:hover{background:#1A1008;}
+.lab-num{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--gold);letter-spacing:0.15em;padding-top:0.2rem;}
+.lab-content{}
+.lab-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--cream);margin-bottom:0.4rem;}
+.lab-desc{font-size:0.82rem;line-height:1.7;color:rgba(245,240,232,0.38);}
+.lab-tag{display:inline-block;margin-top:0.6rem;font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.3);padding:0.2rem 0.6rem;}
+
+/* UPCOMING */
+#upcoming{padding:6rem 4rem;background:var(--rust);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.up-left .sl5{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(245,240,232,0.6);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.up-left .sl5::before{content:'';width:28px;height:1px;background:currentColor;display:block;}
+.up-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--cream);line-height:1.1;margin-bottom:1.2rem;}
+.up-left h2 em{font-style:italic;opacity:0.7;}
+.up-left p{font-size:0.95rem;line-height:1.8;color:rgba(245,240,232,0.65);}
+.up-right{background:rgba(245,240,232,0.08);padding:3rem;border:1px solid rgba(245,240,232,0.15);}
+.event-detail{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(245,240,232,0.15);}
+.event-detail:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.ed-label{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.45);margin-bottom:0.4rem;}
+.ed-val{font-size:1rem;color:var(--cream);font-weight:400;}
+
+footer{background:var(--ink);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+.f-l{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;color:rgba(245,240,232,0.35);}
+.f-r{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.2);}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.12s;}
+.reveal-delay-2{transition-delay:0.24s;}
+.reveal-delay-3{transition-delay:0.36s;}
+@keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  .kev-inner,.circuits-inner,#upcoming{grid-template-columns:1fr;}
+  .ece-grid{grid-template-columns:1fr;}
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">B. —</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="work.html" class="active">Work</a></li>
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="collabs.html">Collaborations</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Connect</a>
+</nav>
+
+<section class="page-banner">
+  <div class="banner-bg-word">Work</div>
+  <div class="sl">Portfolio</div>
+  <h1>The work<br>speaks <em>loudest.</em></h1>
+  <p class="banner-sub">From creative direction to circuit analysis — here's a look at what I've been building, learning, and shipping. Everything here is real work from real projects.</p>
+</section>
+
+<!-- KING'S EYE VISUALS -->
+<section id="kev">
+  <div class="kev-inner">
+    <div class="kev-left reveal">
+      <div class="sl2">Featured Project</div>
+      <div class="kev-role">Founder & Creative Director · 2023 – Present</div>
+      <h2>King's Eye<br><em>Visuals</em></h2>
+      <p>King's Eye Visuals is my creative and technical media venture — a space where visual storytelling meets intentional production. I founded it as a vehicle for professional-grade content creation: photography, brand shoots, visual identity, and creative direction.</p>
+      <p>Every project we take on is an exercise in precision — the same root-cause thinking I apply to engineering problems, applied to the question of what a brand or person needs to communicate visually and why.</p>
+      <div class="kev-tags">
+        <span class="kev-tag">Creative Direction</span>
+        <span class="kev-tag">Photography</span>
+        <span class="kev-tag">Brand Content</span>
+        <span class="kev-tag">Visual Identity</span>
+        <span class="kev-tag">Founder</span>
+      </div>
+      <a href="https://www.instagram.com/kingseyevisuals" target="_blank" class="kev-link">View on Instagram →</a>
+    </div>
+    <div class="kev-right reveal reveal-delay-1">
+      <div class="kev-visual-grid">
+        <div class="kev-block"><span>📷</span></div>
+        <div class="kev-block"><span>🎨</span></div>
+        <div class="kev-block"><span>✦</span></div>
+        <div class="kev-block"><span>🎬</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECE COURSEWORK -->
+<section id="ece">
+  <div class="ece-header reveal">
+    <div class="sl3">Academic Work</div>
+    <h2>ECE Coursework<br><em>& Engineering Projects</em></h2>
+    <p>First-year Electrical and Computer Engineering at Delaware Technical Community College. These aren't just classes — they're the technical foundation for an AI Engineering career.</p>
+  </div>
+  <div class="ece-grid">
+    <div class="ece-card reveal">
+      <div class="ec-course">CSC 114</div>
+      <div class="ec-title">C++ Programming</div>
+      <p class="ec-desc">Foundational programming in C++ under Professor Mike Thompson — structured with industry coding conventions from day one.</p>
+      <ul class="ec-items">
+        <li>Boolean expressions & conditional logic</li>
+        <li>Loop structures: do-while, for, while</li>
+        <li>Functions, scope & parameter passing</li>
+        <li>Progressive lab projects with strict style conventions</li>
+      </ul>
+    </div>
+    <div class="ece-card reveal reveal-delay-1">
+      <div class="ec-course">MAT 183</div>
+      <div class="ec-title">Precalculus & Math Foundations</div>
+      <p class="ec-desc">The critical gating course for the engineering progression — building toward calculus and advanced technical mathematics.</p>
+      <ul class="ec-items">
+        <li>Functions, domain & range</li>
+        <li>Quadratic & radical equations</li>
+        <li>Inverse functions & graph transformations</li>
+        <li>Fractional exponents & systems of equations</li>
+      </ul>
+    </div>
+    <div class="ece-card reveal reveal-delay-2">
+      <div class="ec-course">ELC 109</div>
+      <div class="ec-title">Intro Electronics & Engineering</div>
+      <p class="ec-desc">Hands-on electronics lab work covering the foundational laws and analytical methods every electrical engineer needs.</p>
+      <ul class="ec-items">
+        <li>Ohm's Law applications</li>
+        <li>Series & parallel circuit analysis</li>
+        <li>Kirchhoff's Voltage Law (KVL)</li>
+        <li>Engineering ethics case studies</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CIRCUIT ANALYSIS LABS -->
+<section id="circuits">
+  <div class="circuits-inner">
+    <div class="circuits-left reveal">
+      <div class="sl4">Lab Work</div>
+      <h2>Circuit Analysis<br><em>Labs</em></h2>
+      <p>Lab work is where theory becomes real. These are the hands-on experiments from ELC 109 — where I built circuits, measured values, and learned to trust the math.</p>
+      <p>Each lab reinforced a core principle: in engineering, precision is not optional. Every calculation, every measurement, every result has to account for why.</p>
+    </div>
+    <div class="circuits-right reveal reveal-delay-1">
+      <div class="lab-item">
+        <span class="lab-num">Lab 01</span>
+        <div class="lab-content">
+          <div class="lab-title">Ohm's Law Verification</div>
+          <p class="lab-desc">Built and measured resistive circuits to verify the relationship between voltage, current, and resistance. Calculated theoretical vs. measured values and analyzed percent error.</p>
+          <span class="lab-tag">V = IR</span>
+        </div>
+      </div>
+      <div class="lab-item">
+        <span class="lab-num">Lab 02</span>
+        <div class="lab-content">
+          <div class="lab-title">Series Circuit Analysis</div>
+          <p class="lab-desc">Analyzed multi-resistor series circuits, measured total resistance, voltage drops across each component, and verified series current consistency throughout the loop.</p>
+          <span class="lab-tag">Series Circuits</span>
+        </div>
+      </div>
+      <div class="lab-item">
+        <span class="lab-num">Lab 03</span>
+        <div class="lab-content">
+          <div class="lab-title">Kirchhoff's Voltage Law</div>
+          <p class="lab-desc">Applied KVL to multi-source circuits. Wrote and solved loop equations, verified that the algebraic sum of voltages around any closed loop equals zero.</p>
+          <span class="lab-tag">KVL</span>
+        </div>
+      </div>
+      <div class="lab-item">
+        <span class="lab-num">Case</span>
+        <div class="lab-content">
+          <div class="lab-title">Engineering Ethics Case Study</div>
+          <p class="lab-desc">Analyzed a real-world engineering failure through the lens of professional responsibility, codes of ethics, and the human cost of cutting corners in technical work.</p>
+          <span class="lab-tag">Ethics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPCOMING -->
+<section id="upcoming">
+  <div class="up-left reveal">
+    <div class="sl5">What's Next</div>
+    <h2>On the horizon —<br><em>Microsoft Ability Summit</em></h2>
+    <p>In May 2026 I'll be attending the Microsoft Ability Summit in Redmond, Washington — a gathering at the forefront of accessible and human-centered technology. I'll be creating content through King's Eye Visuals and documenting the experience for my audience.</p>
+  </div>
+  <div class="up-right reveal reveal-delay-1">
+    <div class="event-detail">
+      <div class="ed-label">Event</div>
+      <div class="ed-val">Microsoft Ability Summit 2026</div>
+    </div>
+    <div class="event-detail">
+      <div class="ed-label">Date</div>
+      <div class="ed-val">May 2026</div>
+    </div>
+    <div class="event-detail">
+      <div class="ed-label">Location</div>
+      <div class="ed-val">Redmond, Washington</div>
+    </div>
+    <div class="event-detail">
+      <div class="ed-label">Role</div>
+      <div class="ed-val">Attendee & Content Creator (King's Eye Visuals)</div>
+    </div>
+    <div class="event-detail">
+      <div class="ed-label">Focus</div>
+      <div class="ed-val">Accessible AI · Human-Centered Technology</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-l">Bridget Owusu — Building at the edge.</div>
+  <div class="f-r">© 2025 · All rights reserved</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur');
+const ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='6px';cur.style.height='6px';ring.style.width='52px';ring.style.height='52px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='36px';ring.style.height='36px';});
+});
+window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);});
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

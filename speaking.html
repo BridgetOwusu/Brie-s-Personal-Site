@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speaking — Bridget Owusu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E8;--ink:#1A1510;--gold:#C9A84C;--rust:#8B3A2A;--warm:#9E9088;--card:#EFEAD8;--dark:#0E0A06;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+.cursor{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;}
+.cursor-ring{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3.5rem;transition:background 0.4s;}
+nav.scrolled{background:rgba(15,10,6,0.92);backdrop-filter:blur(12px);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;letter-spacing:0.08em;color:var(--cream);text-decoration:none;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.55);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.55rem 1.2rem;border:1px solid var(--gold);color:var(--gold);text-decoration:none;transition:background 0.2s,color 0.2s;}
+.nav-cta:hover{background:var(--gold);color:var(--ink);}
+
+/* BANNER */
+.page-banner{background:var(--dark);min-height:50vh;display:flex;flex-direction:column;justify-content:flex-end;padding:9rem 4rem 5rem;position:relative;overflow:hidden;}
+.page-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(201,168,76,0.09),transparent 65%);}
+.banner-bg-word{position:absolute;top:50%;right:2rem;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:clamp(9rem,20vw,18rem);font-weight:600;line-height:1;color:rgba(201,168,76,0.04);pointer-events:none;white-space:nowrap;}
+.sec-label{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem;}
+.sec-label::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.page-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:0.95;color:var(--cream);position:relative;z-index:1;opacity:0;transform:translateY(20px);animation:rise 0.9s ease forwards 0.3s;}
+.page-banner h1 em{font-style:italic;color:var(--gold);}
+.page-banner .banner-sub{font-size:1rem;color:rgba(245,240,232,0.5);max-width:540px;line-height:1.75;margin-top:1.4rem;position:relative;z-index:1;opacity:0;animation:rise 0.9s ease forwards 0.55s;}
+
+/* TOPICS */
+#topics{padding:6rem 4rem;background:var(--cream);}
+.topics-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(26,21,16,0.12);}
+.topics-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.1;}
+.topics-header h2 em{font-style:italic;color:var(--rust);}
+.topics-header p{font-size:1rem;line-height:1.8;color:#4A3F34;}
+.topics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(26,21,16,0.1);}
+.topic-card{background:var(--cream);padding:3rem 2.5rem;cursor:default;transition:background 0.3s;position:relative;overflow:hidden;}
+.topic-card:hover{background:var(--card);}
+.tc-num{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--warm);letter-spacing:0.1em;margin-bottom:auto;}
+.tc-body{margin-top:3rem;}
+.tc-tag{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+.topic-card h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;line-height:1.2;margin-bottom:0.9rem;}
+.topic-card p{font-size:0.88rem;line-height:1.75;color:var(--warm);max-width:320px;}
+.tc-bg{position:absolute;inset:0;font-family:'Cormorant Garamond',serif;font-size:10rem;font-weight:600;color:rgba(201,168,76,0.04);display:flex;align-items:flex-end;line-height:1;pointer-events:none;padding-left:1rem;}
+
+/* FORMATS */
+#formats{background:var(--ink);padding:6rem 4rem;}
+#formats .sec-label{color:var(--gold);}
+#formats h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:1rem;max-width:500px;}
+#formats .sub{font-size:0.95rem;color:rgba(245,240,232,0.45);max-width:480px;line-height:1.7;margin-bottom:4rem;}
+.formats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(245,240,232,0.08);margin-bottom:5rem;}
+.format-card{background:var(--ink);padding:2.5rem 2rem;transition:background 0.3s;}
+.format-card:hover{background:#1E1409;}
+.fc-icon{font-size:1.8rem;margin-bottom:1.5rem;}
+.fc-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream);margin-bottom:0.5rem;}
+.fc-duration{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.fc-desc{font-size:0.82rem;line-height:1.7;color:rgba(245,240,232,0.4);}
+
+/* BOOKING CTA */
+.booking-cta{background:var(--rust);padding:4rem;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;}
+.booking-cta h3{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--cream);line-height:1.2;}
+.booking-cta h3 em{font-style:italic;opacity:0.7;}
+.booking-cta p{font-size:0.95rem;color:rgba(245,240,232,0.65);line-height:1.7;margin-top:0.8rem;max-width:500px;}
+.book-btn{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:1rem 2.5rem;background:var(--cream);color:var(--rust);text-decoration:none;white-space:nowrap;transition:background 0.2s,transform 0.15s;display:inline-block;}
+.book-btn:hover{background:var(--gold);color:var(--ink);transform:translateY(-2px);}
+
+/* WHAT TO EXPECT */
+#expect{padding:6rem 4rem;background:var(--card);}
+#expect h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:3rem;line-height:1.2;}
+.expect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+.expect-item{border-top:2px solid var(--gold);padding-top:1.5rem;}
+.ei-num{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--gold);letter-spacing:0.15em;margin-bottom:1rem;}
+.ei-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:0.6rem;}
+.ei-desc{font-size:0.88rem;line-height:1.7;color:var(--warm);}
+
+/* FOOTER */
+footer{background:var(--ink);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+.f-l{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;color:rgba(245,240,232,0.35);}
+.f-r{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.2);}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+@keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  .topics-grid{grid-template-columns:1fr;}
+  .formats-grid{grid-template-columns:1fr 1fr;}
+  .expect-grid{grid-template-columns:1fr;}
+  .topics-header{grid-template-columns:1fr;}
+  .booking-cta{grid-template-columns:1fr;}
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">B. —</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="speaking.html" class="active">Speaking</a></li>
+    <li><a href="collabs.html">Collaborations</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Connect</a>
+</nav>
+
+<!-- BANNER -->
+<section class="page-banner">
+  <div class="banner-bg-word">Speak</div>
+  <div class="sec-label">Speaking Engagements</div>
+  <h1>I have a voice.<br><em>A stage is next.</em></h1>
+  <p class="banner-sub">I speak from the intersection of lived experience and emerging expertise — not theory handed down from a stage, but the view from someone building in real time. Available for panels, keynotes, workshops, and more.</p>
+</section>
+
+<!-- TOPICS -->
+<section id="topics">
+  <div class="topics-header reveal">
+    <div>
+      <div class="sec-label">What I Speak On</div>
+      <h2>Six topics.<br><em>All lived.</em></h2>
+    </div>
+    <p>Every topic I speak on comes from personal experience — not research alone, but from actually navigating the intersection of faith, engineering, creativity, and ambition as a young Black woman building her path.</p>
+  </div>
+  <div class="topics-grid">
+    <div class="topic-card reveal">
+      <div class="tc-bg">01</div>
+      <span class="tc-num">01</span>
+      <div class="tc-body">
+        <div class="tc-tag">Technology · Ethics</div>
+        <h3>AI & Ethics</h3>
+        <p>What does it mean to build AI that actually serves human dignity? A conversation for tech audiences, campus events, and anyone asking the right questions about where this is all going.</p>
+      </div>
+    </div>
+    <div class="topic-card reveal reveal-delay-1">
+      <div class="tc-bg">02</div>
+      <span class="tc-num">02</span>
+      <div class="tc-body">
+        <div class="tc-tag">Career · Path</div>
+        <h3>Non-Traditional Paths Into Tech</h3>
+        <p>Community college. No CS degree. Starting as a GM. How unconventional routes into technology can be strategic — not second-best — and why the road less traveled sometimes leads further.</p>
+      </div>
+    </div>
+    <div class="topic-card reveal reveal-delay-2">
+      <div class="tc-bg">03</div>
+      <span class="tc-num">03</span>
+      <div class="tc-body">
+        <div class="tc-tag">Diversity · STEM</div>
+        <h3>Women in STEM</h3>
+        <p>Building confidence, competence, and community as a woman entering engineering without a traditional runway. For campus events, conferences, and organizations investing in the next generation.</p>
+      </div>
+    </div>
+    <div class="topic-card reveal">
+      <div class="tc-bg">04</div>
+      <span class="tc-num">04</span>
+      <div class="tc-body">
+        <div class="tc-tag">Entrepreneurship · Mindset</div>
+        <h3>Building Before You're Ready</h3>
+        <p>On starting King's Eye Visuals, leading a team as a GM, and pursuing engineering — simultaneously, intentionally, imperfectly. The case for starting before you feel ready.</p>
+      </div>
+    </div>
+    <div class="topic-card reveal reveal-delay-1">
+      <div class="tc-bg">05</div>
+      <span class="tc-num">05</span>
+      <div class="tc-body">
+        <div class="tc-tag">Business · Strategy</div>
+        <h3>Young Entrepreneurship</h3>
+        <p>What it actually takes to build something real at a young age — the mindset shifts, the operational lessons, and what running a creative venture taught me about business fundamentals.</p>
+      </div>
+    </div>
+    <div class="topic-card reveal reveal-delay-2">
+      <div class="tc-bg">06</div>
+      <span class="tc-num">06</span>
+      <div class="tc-body">
+        <div class="tc-tag">Analysis · Thinking</div>
+        <h3>Root-Cause Business Thinking</h3>
+        <p>Why businesses succeed or fail — not the headline version. Slow dissection over quick takes. Teaching audiences to ask better questions before jumping to solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section id="formats">
+  <div class="sec-label">How I Show Up</div>
+  <h2 class="reveal">Four formats.<br>One commitment.</h2>
+  <p class="sub reveal reveal-delay-1">Whether it's a main stage or an intimate room — I bring the same level of preparation, presence, and purpose to every engagement.</p>
+  <div class="formats-grid">
+    <div class="format-card reveal">
+      <div class="fc-icon">🎤</div>
+      <div class="fc-name">Keynote</div>
+      <div class="fc-duration">30 – 60 minutes</div>
+      <p class="fc-desc">Conference, summit, or campus main stage. A singular narrative arc built around one big idea your audience will leave thinking about.</p>
+    </div>
+    <div class="format-card reveal reveal-delay-1">
+      <div class="fc-icon">🗣️</div>
+      <div class="fc-name">Panel</div>
+      <div class="fc-duration">45 – 90 minutes</div>
+      <p class="fc-desc">Moderated discussion with industry peers. I bring a grounded, direct perspective that cuts through consensus thinking.</p>
+    </div>
+    <div class="format-card reveal reveal-delay-2">
+      <div class="fc-icon">⚡</div>
+      <div class="fc-name">Workshop</div>
+      <div class="fc-duration">60 – 120 minutes</div>
+      <p class="fc-desc">Hands-on, interactive session for student or professional groups. Built around real tools, real decisions, and real outcomes.</p>
+    </div>
+    <div class="format-card reveal reveal-delay-3">
+      <div class="fc-icon">🔥</div>
+      <div class="fc-name">Fireside Chat</div>
+      <div class="fc-duration">20 – 45 minutes</div>
+      <p class="fc-desc">Intimate conversation format. The kind of candid exchange that makes people feel like they're getting the version of you that doesn't make it into the keynote.</p>
+    </div>
+  </div>
+
+  <!-- BOOKING CTA -->
+  <div class="booking-cta reveal">
+    <div>
+      <h3>Ready to book<br><em>an engagement?</em></h3>
+      <p>Send me the event name, date, expected audience size, and the topic you have in mind. I'll get back to you within 48 hours.</p>
+    </div>
+    <a href="mailto:thebridgetowusu@gmail.com?subject=Speaking%20Engagement%20Inquiry" class="book-btn">Book Me to Speak →</a>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section id="expect">
+  <div class="sec-label reveal">What to Expect</div>
+  <h2 class="reveal">Working with me<br>looks like this.</h2>
+  <div class="expect-grid">
+    <div class="expect-item reveal">
+      <div class="ei-num">01</div>
+      <div class="ei-title">Thorough Preparation</div>
+      <p class="ei-desc">I research your audience, your event theme, and your goals before I write a single word of the talk. No copy-paste keynotes.</p>
+    </div>
+    <div class="expect-item reveal reveal-delay-1">
+      <div class="ei-num">02</div>
+      <div class="ei-title">Authentic Delivery</div>
+      <p class="ei-desc">I speak from experience, not just expertise. Your audience will feel the difference between someone reciting facts and someone who has actually lived the material.</p>
+    </div>
+    <div class="expect-item reveal reveal-delay-2">
+      <div class="ei-num">03</div>
+      <div class="ei-title">Real Takeaways</div>
+      <p class="ei-desc">Every engagement ends with something actionable. A question to sit with. A framework to apply. Something worth remembering the next morning.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-l">Bridget Owusu — Building at the edge.</div>
+  <div class="f-r">© 2025 · All rights reserved</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur');
+const ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='6px';cur.style.height='6px';ring.style.width='52px';ring.style.height='52px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='36px';ring.style.height='36px';});
+});
+window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);});
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

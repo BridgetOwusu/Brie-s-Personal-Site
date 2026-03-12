@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Bridget Owusu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E8;--ink:#1A1510;--gold:#C9A84C;--rust:#8B3A2A;--warm:#9E9088;--card:#EFEAD8;--dark:#0E0A06;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+.cursor{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;}
+.cursor-ring{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3.5rem;transition:background 0.4s;}
+nav.scrolled{background:rgba(15,10,6,0.92);backdrop-filter:blur(12px);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;letter-spacing:0.08em;color:var(--cream);text-decoration:none;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.55);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.55rem 1.2rem;border:1px solid var(--gold);color:var(--gold);text-decoration:none;transition:background 0.2s,color 0.2s;}
+.nav-cta:hover{background:var(--gold);color:var(--ink);}
+
+/* HERO */
+.about-hero{min-height:100vh;display:grid;grid-template-columns:50% 50%;background:var(--dark);position:relative;overflow:hidden;}
+.ah-left{display:flex;flex-direction:column;justify-content:flex-end;padding:9rem 4rem 5rem;position:relative;z-index:2;}
+.ah-left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 10% 80%,rgba(201,168,76,0.07),transparent 60%);}
+.sl{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;position:relative;z-index:1;}
+.sl::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.ah-left h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,6.5rem);font-weight:300;line-height:0.95;color:var(--cream);position:relative;z-index:1;opacity:0;transform:translateY(20px);animation:rise 0.9s ease forwards 0.3s;}
+.ah-left h1 em{font-style:italic;color:var(--gold);}
+.ah-left p{font-size:1rem;line-height:1.8;color:rgba(245,240,232,0.5);max-width:440px;margin-top:1.5rem;position:relative;z-index:1;opacity:0;animation:rise 0.9s ease forwards 0.55s;}
+.ah-right{position:relative;overflow:hidden;}
+.ah-right img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.ah-right::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(14,10,6,0.6),transparent);z-index:1;}
+.ah-caption{position:absolute;bottom:1.8rem;left:2rem;z-index:2;font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.25);}
+
+/* STORY */
+#story{padding:7rem 4rem;background:var(--cream);display:grid;grid-template-columns:1fr 1.6fr;gap:6rem;align-items:start;}
+.story-left{position:sticky;top:8rem;}
+.story-left .sl2{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.story-left .sl2::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.story-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,3.5rem);font-weight:300;line-height:1.1;}
+.story-left h2 em{font-style:italic;color:var(--rust);}
+.story-right p{font-size:1.05rem;line-height:1.9;color:#3A3028;margin-bottom:1.8rem;}
+.story-right p:first-child::first-letter{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;float:left;line-height:0.75;margin-right:0.15em;margin-top:0.1em;color:var(--gold);}
+.pull-quote{border-left:3px solid var(--gold);padding:1.5rem 2rem;margin:2.5rem 0;background:var(--card);}
+.pull-quote p{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;line-height:1.5;color:var(--ink);margin:0;}
+.pull-quote p em{font-style:italic;color:var(--rust);}
+
+/* VALUES */
+#values{background:var(--ink);padding:6rem 4rem;}
+.values-top{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem;}
+.vt-left .sl3{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.vt-left .sl3::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.vt-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.05;color:var(--cream);}
+.vt-left h2 em{font-style:italic;color:var(--gold);}
+.vt-right p{font-size:0.95rem;line-height:1.8;color:rgba(245,240,232,0.45);}
+.values-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(245,240,232,0.08);}
+.val-card{background:var(--ink);padding:2.5rem 1.8rem;border-top:2px solid transparent;transition:border-color 0.3s,background 0.3s;}
+.val-card:hover{border-color:var(--gold);background:#1A1008;}
+.val-icon{font-size:1.6rem;margin-bottom:1.5rem;}
+.val-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--cream);margin-bottom:0.5rem;}
+.val-desc{font-size:0.82rem;line-height:1.7;color:rgba(245,240,232,0.35);}
+
+/* CURRENTLY */
+#currently{padding:6rem 4rem;background:var(--card);display:grid;grid-template-columns:1fr 1fr;gap:5rem;}
+.curr-left .sl4{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.curr-left .sl4::before{content:'';width:28px;height:1px;background:var(--gold);display:block;}
+.curr-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;margin-bottom:2rem;}
+.curr-left p{font-size:0.95rem;line-height:1.8;color:#4A3F34;}
+.curr-right{display:flex;flex-direction:column;gap:0;}
+.now-item{padding:1.5rem 0;border-bottom:1px solid rgba(26,21,16,0.12);display:grid;grid-template-columns:80px 1fr;gap:1rem;align-items:start;}
+.now-item:last-child{border-bottom:none;}
+.ni-label{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);padding-top:0.15rem;}
+.ni-val{font-size:0.92rem;line-height:1.6;color:var(--ink);}
+.ni-val strong{font-weight:500;}
+
+/* FAITH NOTE */
+.faith-note{background:var(--rust);padding:5rem 4rem;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;}
+.faith-note blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;line-height:1.3;color:var(--cream);}
+.faith-note blockquote em{font-style:italic;opacity:0.7;}
+.faith-note cite{display:block;margin-top:1rem;font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.5);}
+.fn-right{text-align:right;}
+.fn-icon{font-size:4rem;opacity:0.3;}
+
+footer{background:var(--ink);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+.f-l{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;color:rgba(245,240,232,0.35);}
+.f-r{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.2);}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.12s;}
+.reveal-delay-2{transition-delay:0.24s;}
+.reveal-delay-3{transition-delay:0.36s;}
+.reveal-delay-4{transition-delay:0.48s;}
+@keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  .about-hero{grid-template-columns:1fr;min-height:auto;}
+  .ah-right{height:60vw;}
+  #story{grid-template-columns:1fr;gap:2rem;}
+  .story-left{position:static;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .values-top{grid-template-columns:1fr;}
+  #currently{grid-template-columns:1fr;}
+  .faith-note{grid-template-columns:1fr;}
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">B. —</a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="collabs.html">Collaborations</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Connect</a>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="ah-left">
+    <div class="sl">About</div>
+    <h1>Engineer.<br>Founder.<br><em>Believer.</em></h1>
+    <p>I'm Bridget Owusu — an Electrical and Computer Engineering student at Delaware Technical Community College, building toward a future in AI Engineering. This is my story.</p>
+  </div>
+  <div class="ah-right">
+    <img src="brie-photo.jpg" alt="Bridget Owusu">
+    <span class="ah-caption">Bridget Owusu · 2025</span>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-left reveal">
+    <div class="sl2">My Story</div>
+    <h2>Not a straight<br>line. <em>A strategy.</em></h2>
+  </div>
+  <div class="story-right">
+    <p class="reveal">I didn't arrive at engineering the easy way. I arrived here with purpose — through managing a team at Chocolate Moonshine, building a creative media venture from scratch, and deciding that the intersection of technology, creativity, and faith was exactly where I was supposed to be.</p>
+    <p class="reveal">I'm a first-year Electrical and Computer Engineering student at Delaware Technical Community College, where I hold a scholarship and am working through coursework in C++ programming, circuit analysis, and precalculus — the foundational layer of what will eventually become a career in AI Engineering.</p>
+    <div class="pull-quote reveal">
+      <p>"I don't believe in waiting until you're fully ready. I believe in <em>building readiness</em> through the work itself."</p>
+    </div>
+    <p class="reveal">Alongside school, I founded King's Eye Visuals — a creative and technical media venture where I direct, produce, and curate visual content with intention. It's where my engineering mindset meets my artistic eye, and where I've learned more about business, aesthetics, and communication than any classroom has taught me alone.</p>
+    <p class="reveal">My faith is not a footnote. It is the foundation. I approach every decision — academic, entrepreneurial, relational — through a framework rooted in purpose, long-term thinking, and the conviction that God's design for my life is more strategic than anything I could plan on my own.</p>
+    <p class="reveal">I'm not building a resume. I'm building a life that holds together — where the engineer, the founder, the creator, and the believer are all the same person, moving in the same direction.</p>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="values-top">
+    <div class="vt-left reveal">
+      <div class="sl3">What I Stand On</div>
+      <h2>Five values.<br><em>Non-negotiable.</em></h2>
+    </div>
+    <div class="vt-right reveal reveal-delay-1">
+      <p>These aren't aspirational words on a wall. These are the convictions that actually determine how I make decisions, who I work with, and what I build.</p>
+    </div>
+  </div>
+  <div class="values-grid">
+    <div class="val-card reveal">
+      <div class="val-icon">✦</div>
+      <div class="val-name">Faith-Rooted</div>
+      <p class="val-desc">Every pursuit — academic, creative, entrepreneurial — begins and ends with conviction that God's design is wiser than my own plans.</p>
+    </div>
+    <div class="val-card reveal reveal-delay-1">
+      <div class="val-icon">⚡</div>
+      <div class="val-name">Human-Centered AI</div>
+      <p class="val-desc">Technology should serve human dignity, not diminish it. I'm building toward AI that actually helps people — not just performs.</p>
+    </div>
+    <div class="val-card reveal reveal-delay-2">
+      <div class="val-icon">🎯</div>
+      <div class="val-name">Creative Precision</div>
+      <p class="val-desc">Beauty and rigor are not opposites. The best work is both technically sound and aesthetically intentional.</p>
+    </div>
+    <div class="val-card reveal reveal-delay-3">
+      <div class="val-icon">🔍</div>
+      <div class="val-name">Root-Cause Thinking</div>
+      <p class="val-desc">I don't accept surface-level answers. In engineering, business, or theology — I want to understand why before I decide what.</p>
+    </div>
+    <div class="val-card reveal reveal-delay-4">
+      <div class="val-icon">🌱</div>
+      <div class="val-name">Long-Game Builder</div>
+      <p class="val-desc">I'm not optimizing for the next six months. I'm building foundations that compound — educationally, professionally, and creatively.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CURRENTLY -->
+<section id="currently">
+  <div class="curr-left reveal">
+    <div class="sl4">Right Now</div>
+    <h2>What I'm doing<br>at this moment.</h2>
+    <p>Life is happening in multiple lanes simultaneously — and that's intentional. Here's a snapshot of what's occupying my time, energy, and attention right now.</p>
+  </div>
+  <div class="curr-right reveal reveal-delay-1">
+    <div class="now-item">
+      <span class="ni-label">Studying</span>
+      <span class="ni-val"><strong>ECE Year 1 at DTCC</strong> — C++ Programming, Circuit Analysis, Precalculus</span>
+    </div>
+    <div class="now-item">
+      <span class="ni-label">Building</span>
+      <span class="ni-val"><strong>King's Eye Visuals</strong> — Creative direction, photography, and brand content</span>
+    </div>
+    <div class="now-item">
+      <span class="ni-label">Reading</span>
+      <span class="ni-val">AI ethics, systems thinking, theology and apologetics</span>
+    </div>
+    <div class="now-item">
+      <span class="ni-label">Developing</span>
+      <span class="ni-val"><strong>Reflections</strong> — A podcast concept exploring business, strategy, and big ideas</span>
+    </div>
+    <div class="now-item">
+      <span class="ni-label">Upcoming</span>
+      <span class="ni-val"><strong>Microsoft Ability Summit</strong> — May 2026, Redmond, WA</span>
+    </div>
+    <div class="now-item">
+      <span class="ni-label">Pursuing</span>
+      <span class="ni-val">Full Stack Developer certificate + AI Engineering transfer pathway</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAITH NOTE -->
+<div class="faith-note reveal">
+  <div>
+    <blockquote>"For I know the plans I have for you —<br><em>plans to prosper you and not to harm you."</em></blockquote>
+    <cite>Jeremiah 29:11 · The verse I build on</cite>
+  </div>
+  <div class="fn-right"><div class="fn-icon">✦</div></div>
+</div>
+
+<footer>
+  <div class="f-l">Bridget Owusu — Building at the edge.</div>
+  <div class="f-r">© 2025 · All rights reserved</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur');
+const ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='6px';cur.style.height='6px';ring.style.width='52px';ring.style.height='52px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='36px';ring.style.height='36px';});
+});
+window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);});
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
